@@ -1,22 +1,25 @@
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
+import apiRequest from "../../lib/apiRequest";
 // import apiRequest from "../../lib/apiRequest";
 
 const Register = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
     const formData = new FormData(e.target);
     const username = formData.get("username");
     const email = formData.get("email");
     const password = formData.get("password");
     console.log(username, email, password);
     try {
-      const res = await axios.post("http://localhost:2002/api/auth/register", {
+      const res = await apiRequest.post("auth/register", {
         username,
         email,
         password,
@@ -26,6 +29,8 @@ const Register = () => {
     } catch (error) {
       console.log(error);
       setError(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
