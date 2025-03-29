@@ -6,6 +6,7 @@ import SinglePage from "./pages/singlrpage/SinglePage";
 import LoginPage from "./pages/loginpage/LoginPage";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
+import ProfileUpdate from "./pages/profileUpdate/ProfileUpdate";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +43,10 @@ function App() {
         {
           path: "/profile",
           element: <Profile />,
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdate />,
         },
       ],
     },
